@@ -1,7 +1,6 @@
-cmake_minimum_required(VERSION 3.12)
-project(NanaCreator)
+cmake_minimum_required(VERSION 3.5)
+project(nana-creator)
 
-# thank you evoke!
 add_executable(nana-creator
     libs/pugixml/pugixml.hpp
     libs/pugixml/pugixml.cpp
@@ -104,11 +103,26 @@ add_executable(nana-creator
     src/ctrls/picture.cpp
     src/propertiespanel.h
     src/ctrls/toolbar.cpp
-)
+    )
 
 target_compile_options(nana-creator PRIVATE -std=c++17 -pthread)
 target_include_directories(nana-creator PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/libs
     ${CMAKE_CURRENT_SOURCE_DIR}/src
-)
-target_link_libraries(nana-creator PRIVATE  -L/usr/local -lnana -L/usr -lX11 -lXft -lXcursor -lfontconfig -lstdc++fs -lpthread )
+    )
+
+target_link_libraries(nana-creator
+  PRIVATE  -L/usr/local -lnana -L/usr -lX11 -lXft -lXcursor -lfontconfig -lstdc++fs -lpthread
+  )
+
+add_executable(test-ctrls
+    tests/ctrls/main.cpp
+    tests/ctrls/ctrls.ncp
+    tests/ctrls/ctrls.h
+    )
+target_link_libraries(test-ctrls
+  PRIVATE  -L/usr/local -lnana -L/usr -lX11 -lXft -lXcursor -lfontconfig -lstdc++fs -lpthread
+  )
+add_test(NAME test-ctrls COMMAND test-ctrls)
+
+include(CTest)
