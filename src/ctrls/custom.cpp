@@ -5,6 +5,9 @@
  *      Author: besh81
  */
 
+
+#include <nana/gui/drawing.hpp>
+
 #include "config.h"
 #include "ctrls/custom.h"
 #include "filemanager.h"

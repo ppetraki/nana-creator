@@ -9,6 +9,7 @@
 #define NANA_CREATOR_NOTEBOOK_H
 
 #include <mutex>
+#include <nana/gui/place.hpp>
 #include <nana/gui/widgets/panel.hpp>
 #include <nana/gui/widgets/tabbar.hpp>
 #include "ctrls/ctrl.h"

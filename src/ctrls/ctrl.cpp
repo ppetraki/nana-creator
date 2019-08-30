@@ -7,6 +7,7 @@
 
 #include "config.h"
 #include "ctrls/ctrl.h"
+#include <nana/gui/drawing.hpp>
 #include "nana_extra/color_helper.h"
 #include "style.h"
 

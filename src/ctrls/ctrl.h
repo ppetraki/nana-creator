@@ -10,7 +10,9 @@
 
 #include "config.h"
 #include <memory>
-#include <nana/gui/wvl.hpp>
+#include <nana/gui/drawing.hpp>
+#include <nana/gui/msgbox.hpp>
+#include <nana/gui/widgets/widget.hpp>
 #include "ctrls/property.h"
 #include "codegenerator_data.h"
 
@@ -101,7 +103,7 @@ namespace ctrls
 		// drawing functions
 		void draw_highlight(nana::paint::graphics& graph, highlight_mode mode, mouse_position pos);
 		void draw_selection(nana::paint::graphics& graph);
-		
+
 		// mouse position inside the control
 		mouse_position mouse_pos(nana::point pos, nana::size size);
 
