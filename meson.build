@@ -11,20 +11,7 @@ cpp = meson.get_compiler('cpp')
 add_project_arguments(cpp.get_supported_arguments(cpp_flags), language : 'cpp')
 add_project_link_arguments(cpp.get_supported_link_arguments(link_flags), language : 'cpp')
 
-
-pugixml_lib = static_library('pugixml',
-  files('''
-  libs/pugixml/pugiconfig.hpp
-  libs/pugixml/pugixml.cpp
-  libs/pugixml/pugixml.hpp
-    '''.split()),
-  cpp_args:cpp_flags)
-
-# this directory structure should be turned around
-pugixml_dep = declare_dependency(
-  link_with: pugixml_lib,
-  include_directories: include_directories('libs')
-  )
+subdir('libs')
 
 nana_dep  = dependency('nana')
 
