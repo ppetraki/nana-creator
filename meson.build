@@ -134,3 +134,12 @@ executable('nana-creator',
   include_directories: include_dirs,
   dependencies: [pugixml_dep, nana_dep]
   )
+
+test_ctrls = executable('test-ctrls',
+    files('''
+    tests/ctrls/main.cpp
+    tests/ctrls/ctrls.h
+    '''.split()),
+  dependencies: [pugixml_dep, nana_dep]
+    )
+test('test-ctrls', test_ctrls)
