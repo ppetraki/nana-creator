@@ -7,13 +7,26 @@ project('nana-creator',
 cpp_flags  = []
 link_flags = []
 
+add_languages('c')
+cc = meson.get_compiler('c')
+
 cpp = meson.get_compiler('cpp')
 add_project_arguments(cpp.get_supported_arguments(cpp_flags), language : 'cpp')
 add_project_link_arguments(cpp.get_supported_link_arguments(link_flags), language : 'cpp')
 
+# provides pugixml_dep
 subdir('libs')
+common_dep = [pugixml]
 
-nana_dep  = dependency('nana')
+nana_dep = cpp.find_library('nana')
+x11_dep = cc.find_library('X11')
+xft_dep = cc.find_library('Xft')
+xcursor_dep = cc.find_library('Xcursor')
+fontconfig_dep  = cc.find_library('fontconfig')
+stdcppfs_dep = cpp.find_library('stdc++fs')
+threads_dep = cc.find_library('pthread')
+
+common_dep += [nana_dep, x11_dep, xft_dep, xcursor_dep, fontconfig_dep, stdcppfs_dep, threads_dep]
 
 include_dirs = include_directories('src')
 
@@ -119,14 +132,15 @@ executable('nana-creator',
   src/tree.h
   '''.split()),
   include_directories: include_dirs,
-  dependencies: [pugixml_dep, nana_dep]
+  dependencies: [common_dep]
   )
 
 test_ctrls = executable('test-ctrls',
     files('''
-    tests/ctrls/main.cpp
     tests/ctrls/ctrls.h
+    tests/ctrls/main.cpp
     '''.split()),
-  dependencies: [pugixml_dep, nana_dep]
+    dependencies: [common_dep]
     )
+
 test('test-ctrls', test_ctrls)
